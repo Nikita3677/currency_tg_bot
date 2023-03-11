@@ -9,16 +9,20 @@ def help(update, context):
     if update.effective_chat is not None:
         chat = update.effective_chat
         message = (
-            f'<em><b>Команда course</b></em>:\n'
-            f'После ввода команды следующим параметром '
-            f'введите <u>код валюты</u>\n'
-            f'\n<em><b>Команда sub</b></em>:\n'
-            f'После ввода команды нужно ввести 2 параметра, '
-            f'<u>время(в секундах)</u> и <u>код валюты</u>\n'
-            f'\n<em><b>Команда unsub</b></em>:\n'
-            f'Если вы хотите отписаться от рассылки,то '
-            f'используйте эту команду'
+            '<em><b>Команда course</b></em>:\n'
+            'После ввода команды следующим параметром '
+            'введите <u>код валюты</u>\n'
+            '\n<em><b>Команда sub</b></em>:\n'
+            'После ввода команды нужно ввести 2 параметра, '
+            '<u>время(в секундах)</u> и <u>код валюты</u>\n'
+            '\n<em><b>Команда unsub</b></em>:\n'
+            'Если вы хотите отписаться от рассылки,то '
+            'используйте эту команду'
         )
-        context.bot.send_message(chat_id=chat.id, text=message, parse_mode='html')
+        context.bot.send_message(
+            chat_id=chat.id,
+            text=message,
+            parse_mode='html'
+        )
     else:
         logger.warning('Не получен id чата "/help"')

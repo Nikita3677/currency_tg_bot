@@ -10,7 +10,10 @@ def start(update, context):
     if update.effective_chat is not None:
         chat = update.effective_chat
         name = update.message.chat.first_name
-        button = ReplyKeyboardMarkup([['/commands','/help','/show_all']], resize_keyboard=True)
+        button = ReplyKeyboardMarkup(
+            [['/commands', '/help', '/show_all']],
+            resize_keyboard=True
+        )
         message = (
             f'Привет {name},\n'
             f'Я могу прислать тебе '
@@ -18,6 +21,10 @@ def start(update, context):
             f'Для того чтобы узнать, что я могу, введи:'
             f'\n/commands - это покажет список доступных команд.\n'
         )
-        context.bot.send_message(chat_id=chat.id, text=message, reply_markup=button)
+        context.bot.send_message(
+            chat_id=chat.id,
+            text=message,
+            reply_markup=button
+        )
     else:
         logger.warning('Не получен id чата "/start"')

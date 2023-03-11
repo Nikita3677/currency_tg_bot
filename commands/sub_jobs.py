@@ -6,8 +6,6 @@ from datetime import datetime
 logger = logging.getLogger(__name__)
 
 
-
-
 def remove_job(name, context):
     jobs = context.job_queue.get_jobs_by_name(name)
     if not jobs:
@@ -38,7 +36,7 @@ def new_course(context):
         if nominal > 1:
             message += f'\n В соотношении 1 RUB к {nominal} {valute_code}'
         context.bot.send_message(job.context, text=message)
-    except Exception as err:
+    except Exception:
         message = 'Такой валюты нет !'
         context.bot.send_message(job.context, text=message)
         logger.warning('Неправильный код валюты пропускаем')
@@ -57,12 +55,15 @@ def sub(update, context):
             context.bot_data['name'] = valute_code
             response = hand.make_request(constants.URL).json()
             response_val = response.get('Valute')
-            if not valute_code in response_val:
+            if valute_code not in response_val:
                 update.message.reply_text('Такой валюты нет!')
                 logger.warning('Неправильный код валюты пропускаем')
                 return
             job_remove = remove_job(str(chat.id), context)
-            context.job_queue.run_repeating(new_course, time, context=chat.id, name=str(chat.id))
+            context.job_queue.run_repeating(
+                new_course, time,
+                context=chat.id, name=str(chat.id)
+            )
             message = "Вы подписались на новую рассылку"
             if job_remove:
                 message += " и удалили старую"

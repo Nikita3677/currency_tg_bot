@@ -27,7 +27,11 @@ def show_all(update, context):
             f'Фунт - {values_valutes.get("GBP")}\n'
             f'Дирхам - {values_valutes.get("AED")}\n'
         )
-        context.bot.send_message(chat_id=chat.id, text=message, parse_mode='html')
+        context.bot.send_message(
+            chat_id=chat.id,
+            text=message,
+            parse_mode='html'
+        )
     else:
         logger.warning('Не получен id чата "/show_all"')
 

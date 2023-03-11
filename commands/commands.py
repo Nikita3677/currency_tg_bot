@@ -9,14 +9,18 @@ def commands(update, context):
     if update.effective_chat is not None:
         chat = update.effective_chat
         message = (
-            f'=======<b>Список команд</b>========\n'
-            f'\n~ /show_all - курс популярных валют\n'
-            f'\n~ /course - курс интересующей валюты\n'
-            f'\n~ /sub - подписаться на рассылку\n'
-            f'\n~ /unsub - отписаться от рассылки\n'
-            f'\n~ /help - как пользоваться\n'
-            f'\n~ /start - приветственная информация\n'
+            '=======<b>Список команд</b>========\n'
+            '\n~ /show_all - курс популярных валют\n'
+            '\n~ /course - курс интересующей валюты\n'
+            '\n~ /sub - подписаться на рассылку\n'
+            '\n~ /unsub - отписаться от рассылки\n'
+            '\n~ /help - как пользоваться\n'
+            '\n~ /start - приветственная информация\n'
         )
-        context.bot.send_message(chat_id=chat.id, text=message, parse_mode='html')
+        context.bot.send_message(
+            chat_id=chat.id,
+            text=message,
+            parse_mode='html'
+        )
     else:
         logger.warning('Не получен id чата "/commands"')
